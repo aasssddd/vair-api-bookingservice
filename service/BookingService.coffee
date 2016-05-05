@@ -13,7 +13,7 @@ module.exports.serviceInit = (client, callback) ->
 	options = 
 		strUserName: "softmobile"
 		strAgencyCode: "B2C"
-		strPassword: "qazwsx"
+		strPassword: "B2C135"
 		# strLanguageCode: "ZH"
 
 	client.ServiceInitialize options, (err, soapResult) ->
@@ -27,8 +27,9 @@ module.exports.serviceInit = (client, callback) ->
 					log.error "initialize result is not an xml: #{err}"
 					throw err
 					return callback err, null
-				log.info "raw request: #{client.lastRequest}"
-				log.info "ServiceInitializeResult is #{JSON.stringify parsedResult}"
+				log.debug "raw request: #{client.lastRequest}"
+				log.debug "raw response: #{client.lastResponse}"
+				log.debug "ServiceInitializeResult is #{JSON.stringify parsedResult, null, 4}"
 				if "#{parsedResult.error.code}" != "000"
 					log.warn "error login credential"
 					return callback "initialize fail", null
@@ -46,7 +47,7 @@ module.exports.getItinerary = (client, pnr, callback) ->
 				log.error "result is not an xml: #{err}"
 				throw err
 				return callback err, null
-			log.info "#{JSON.stringify parsedResult}"
+			log.debug "#{JSON.stringify parsedResult}"
 			return callback null, parsedResult
 
 

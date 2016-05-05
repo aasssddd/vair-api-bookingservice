@@ -5,7 +5,7 @@ restify = require 'restify'
 log = getLogger 'info', {name: "itinerary.log", path: "./log"}
 
 server = restify.createServer {
-	name: "itinerary service",
+	name: "booking service",
 	version: "1.0.0"
 }
 
@@ -29,10 +29,10 @@ server.get "/itinerary/:pnr", (req, res, next) ->
 				if err?
 					log.error err
 					return res.json {code: "2000", message: err}
-				return res.json {code: "0000", result}
+				return res.json {code: "0000", message: result}
 
 
 
-server.listen 8080, () ->
+server.listen 8000, () ->
 	log.info "#{server.name} is listen at #{server.url}"
 	# console.log "#{server.name} is listen at #{server.url}"

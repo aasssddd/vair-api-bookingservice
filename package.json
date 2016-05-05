@@ -1,5 +1,5 @@
 {
-  "name": "itinerary_service",
+  "name": "booking_service",
   "version": "1.0.0",
   "description": "npm start",
   "main": "index.coffee",
