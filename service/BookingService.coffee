@@ -1,6 +1,6 @@
 soap = require 'soap'
 Cookie = require 'soap-cookie'
-Logger = require 'vair_log'
+Logger = require('vair_log').Logger
 {parseString} = require 'xml2js'
 
 wsdl = "https://vair_secure.avantik.io/tikAeroWebAPI/BookingService.asmx?WSDL"
