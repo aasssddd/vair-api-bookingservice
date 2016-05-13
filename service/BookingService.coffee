@@ -1,11 +1,12 @@
 soap = require 'soap'
 Cookie = require 'soap-cookie'
-getLogger = require 'vair_log'
+Logger = require 'vair_log'
 {parseString} = require 'xml2js'
 
 wsdl = "https://vair_secure.avantik.io/tikAeroWebAPI/BookingService.asmx?WSDL"
 
-log = getLogger "info", {name: "itinerary.log", path: "./log"}
+# log = getLogger "info", {name: "itinerary.log", path: "./log"}
+log = Logger.getLogger()
 
 
 #  initialize query

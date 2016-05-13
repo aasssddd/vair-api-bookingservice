@@ -1,8 +1,10 @@
-getLogger = require 'vair_log'
+Logger = require('vair_log').Logger
 restify = require 'restify'
 {getClient, serviceInit, getItinerary} = require './service/BookingService'
 
-log = getLogger 'info', {name: "itinerary.log", path: "./log"}
+
+# log = getLogger 'info', {name: "itinerary.log", path: "./log"}
+log = Logger.getLogger()
 
 server = restify.createServer {
 	name: "booking service",
