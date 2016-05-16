@@ -31,9 +31,6 @@ server.get "/itinerary/:pnr", (req, res, next) ->
 				if err?
 					log.error err
 					return res.json {code: "2000", message: err}
-				else if result.code != "0000"
-					log.warn result
-					return res.json {code: "3000", message: result}
 				return res.json {code: "0000", message: result}
 
 
