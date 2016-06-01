@@ -6,7 +6,7 @@ module.exports = {
 	file: {
 		level: "info",
 		name: "bookingService.log",
-		path: "log"
+		path: "./log"
 	},
 	logentries: {
 		"level": "info",
