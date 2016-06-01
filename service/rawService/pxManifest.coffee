@@ -25,9 +25,9 @@ module.exports.getPassengerManifest = (client, opts, callback) ->
 			bTransit: opts.bTransit ? undefined
 
 	client.GetPassengerManifest request, (err, result) ->
-		console.log "request header: #{JSON.stringify client.lastRequestHeaders}"
-		console.log "request: #{client.lastRequest}"
-		console.log "response: #{client.lastResponse}"
+		# console.log "request header: #{JSON.stringify client.lastRequestHeaders}"
+		# console.log "request: #{client.lastRequest}"
+		# console.log "response: #{client.lastResponse}"
 		if err?
 			throw err
 		else

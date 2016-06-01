@@ -15,8 +15,7 @@ d.on 'error', (err) ->
 d.run =>
 	server = restify.createServer {
 		name: "booking service",
-		version: "1.0.0",
-		log: log
+		version: "1.0.0"
 	}
 
 	server.use restify.acceptParser(server.acceptable)
