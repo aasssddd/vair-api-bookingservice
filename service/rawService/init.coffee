@@ -11,7 +11,7 @@ module.exports.serviceInit = (client, options, callback) ->
 		strPassword: options.strPassword ? ""
 		# strLanguageCode: "ZH"
 
-	console.log "request: #{JSON.stringify options}"
+	# console.log "request: #{JSON.stringify options}"
 
 	client.ServiceInitialize options, (err, soapResult) ->
 		if err?
