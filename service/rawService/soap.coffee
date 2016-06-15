@@ -10,5 +10,4 @@ module.exports.getClient = (wsdl, callback) ->
 			throw "get client fail: #{err}"
 			return callback err, null
 		else 
-			log.info "get client successful"
 			return callback null, client

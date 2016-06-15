@@ -7,27 +7,27 @@ tosource = require 'tosource'
 
 class ServiceCtl	
 	@getItinerary = (pnr, callback) ->
-
-		wsdl = config.booking_service.wsdl
+		wsdl = config.itinerary_service.wsdl
 		options = 
-			strUserName: config.booking_service.userName
-			strAgencyCode: config.booking_service.agencyCode
-			strPassword: config.booking_service.password 
+			strUserName: config.itinerary_service.userName
+			strAgencyCode: config.itinerary_service.agencyCode
+			strPassword: config.itinerary_service.password 
+
 		booking.soap.getClient wsdl, (err, client) ->
 			if err?
 				throw "get soap client fail: #{err}"
 			booking.init.serviceInit client, options, (err, authorizedClient) ->
 				if err?
 					throw "service init fail #{err}"
-				booking.itinerary.getItinerary authorizedClient, pnr, (err, result) ->
+				booking.itinerary.getItinerary authorizedClient, pnr, config.itinerary_service.faultToranceTimes, (err, result) ->
 					callback err, result
 
 	@getPassengerManifest = (args, callback) ->
-		wsdl = config.booking_service.wsdl
+		wsdl = config.manifest_service.wsdl
 		options = 
-			strUserName: config.booking_service.userName
-			strAgencyCode: config.booking_service.agencyCode
-			strPassword: config.booking_service.password
+			strUserName: config.manifest_service.userName
+			strAgencyCode: config.manifest_service.agencyCode
+			strPassword: config.manifest_service.password
 		booking.soap.getClient wsdl, (err, client) ->
 			if err?
 				throw err
