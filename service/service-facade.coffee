@@ -19,7 +19,8 @@ class ServiceCtl
 			booking.init.serviceInit client, options, (err, authorizedClient) ->
 				if err?
 					throw "service init fail #{err}"
-				booking.itinerary.getItinerary authorizedClient, pnr, config.itinerary_service.faultToranceTimes, (err, result) ->
+				itinerary = new booking.itinerary config.itinerary_service.faultToranceTimes
+				itinerary.getItinerary authorizedClient, pnr, config.itinerary_service.faultToranceTimes, (err, result) ->
 					callback err, result
 
 	@getPassengerManifest = (args, callback) ->

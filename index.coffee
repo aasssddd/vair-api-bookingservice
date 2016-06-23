@@ -3,6 +3,7 @@ restify = require 'restify'
 ServiceCtl = require './service/service-facade'
 domain = require 'domain'
 tosource = require 'tosource'
+moment = require 'moment'
 
 # log = getLogger 'info', {name: "itinerary.log", path: "./log"}
 log = Logger.getLogger()
@@ -35,11 +36,17 @@ d.run =>
 		log.info "retrieve request with params: #{JSON.stringify req.params}"
 		pnr = req.params.pnr
 
-		ServiceCtl.getItinerary pnr, (err, data) ->
-			if err?
-				log.error "error occur: #{err}"
-				return res.json {code: "9000", message: err}
-			return res.json {code: "0000", message: data}
+		try 
+			period = moment()
+			ServiceCtl.getItinerary pnr, (err, data) ->
+				log.warn "response time: #{moment().diff period, 'second'}"
+				if err?
+					log.error "error occur: #{err}"
+					return res.json {code: "9000", message: err}
+				return res.json {code: "0000", message: data}
+		catch err
+			log.error "get Itinerary Failed: #{err}"
+			return res.json {code: "9000", message: err}
 
 	server.listen 8000, () ->
 		log.info "#{server.name} is listen at #{server.url}"
