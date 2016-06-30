@@ -39,7 +39,7 @@ d.run =>
 		try 
 			period = moment()
 			ServiceCtl.getItinerary pnr, (err, data) ->
-				log.warn "response time: #{moment().diff period, 'second'}"
+				log.debug "response time: #{moment().diff period, 'second'}"
 				if err?
 					log.error "error occur: #{err}"
 					return res.json {code: "9000", message: err}
