@@ -48,6 +48,22 @@ d.run =>
 			log.error "get Itinerary Failed: #{err}"
 			return res.json {code: "9000", message: err}
 
+	server.post "/booking/getBooking", (req, res, next) ->
+		opts = req.body
+		ServiceCtl.getBooking opts, (err, data) ->
+			if err?
+				log.error "error occur #{err}"
+				return res.json {code: "9000", message: err}
+			return res.json {code: "0000", message: data}
+
+	server.post "/booking/getFlightAvailability", (req, res, next) ->
+		opts = req.body
+		ServiceCtl.getFlightAvailability opts, (err, data) ->
+			if err?
+				log.error "error occur #{err}"
+				return res.json {code: "9000", message: err}
+			return res.json {code: "0000", message: data}
+
 	server.listen 8000, () ->
 		log.info "#{server.name} is listen at #{server.url}"
 		# console.log "#{server.name} is listen at #{server.url}"

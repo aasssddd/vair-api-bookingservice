@@ -12,8 +12,10 @@ module.exports.serviceInit = (client, options, callback) ->
 		# strLanguageCode: "ZH"
 
 	# console.log "request: #{JSON.stringify options}"
-
 	client.ServiceInitialize options, (err, soapResult) ->
+		# log.info "raw request: #{client.lastRequest}"
+		# log.info "raw response: #{client.lastResponse}"
+		
 		if err?
 			log.error "initialize fail: #{err}"
 			throw err
@@ -23,10 +25,6 @@ module.exports.serviceInit = (client, options, callback) ->
 				if err?
 					log.error "initialize result is not an xml: #{err}"
 					throw err
-					# return callback err, null
-				log.debug "raw request: #{client.lastRequest}"
-				log.debug "raw response: #{client.lastResponse}"
-				log.debug "ServiceInitializeResult is #{JSON.stringify parsedResult, null, 4}"
 				if "#{parsedResult.error.code}" != "000"
 					log.warn "error login credential"
 					return callback "initialize fail", null

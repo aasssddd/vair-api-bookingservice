@@ -1,17 +1,17 @@
 # service-facade.coffee
 {parseString} = require 'xml2js'
-config = require '../config'
+config = require 'app-config'
 require_tree = require 'require-tree'
 booking = require_tree './rawService'
 tosource = require 'tosource'
 
 class ServiceCtl	
 	@getItinerary = (pnr, callback) ->
-		wsdl = config.itinerary_service.wsdl
+		wsdl = config.booking_service.wsdl
 		options = 
-			strUserName: config.itinerary_service.userName
-			strAgencyCode: config.itinerary_service.agencyCode
-			strPassword: config.itinerary_service.password 
+			strUserName: config.booking_service.userName
+			strAgencyCode: config.booking_service.agencyCode
+			strPassword: config.booking_service.password 
 
 		booking.soap.getClient wsdl, (err, client) ->
 			if err?
@@ -37,5 +37,28 @@ class ServiceCtl
 					throw err
 				booking.pxManifest.getPassengerManifest authorizedClient, args, (err, data) ->
 					return callback err, data
+
+	@getBooking = (args, callback) ->
+		wsdl = config.booking_service.wsdl
+		options = 
+			strUserName: config.booking_service.userName
+			strAgencyCode: config.booking_service.agencyCode
+			strPassword: config.booking_service.password
+		booking.soap.getClient wsdl, (err, client) ->
+			if err?
+				throw err
+			booking.init.serviceInit client, options, (err, authorizedClient) ->
+				if err?
+					throw err
+				booking.getBooking authorizedClient, args, (err, data) ->
+					return callback err, data
+
+	@getFlightAvailability = (args, callback) ->
+		wsdl = config.booking_service.wsdl
+		booking.soap.getClient wsdl, (err, client) ->
+			if err?
+				throw err
+			booking.flightAvailability client, args, (err, data) ->
+				return callback err, data
 
 module.exports = ServiceCtl
